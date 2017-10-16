@@ -10,7 +10,7 @@ import java.io.InputStream;
  */
 public class ExtendInputStream extends InputStream {
 
-    InputStream input;
+    private InputStream input;
 
     public ExtendInputStream(InputStream stream){
         this.input = stream;

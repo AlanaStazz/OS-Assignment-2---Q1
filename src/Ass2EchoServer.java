@@ -3,6 +3,7 @@
 //October 19, 2017
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,38 +11,42 @@ import java.net.Socket;
 public class Ass2EchoServer {
 
     public static void main(String args[]){
-
+            Boolean on = true;
         try{
 
             //Make new socket
             ServerSocket sock = new ServerSocket(666);
 
             //While listening...
-            while(true){
+            while(on){
 
-                //Accept an attempt and call it client
+                //Listen for attempted connection
                 Socket client = sock.accept();
 
-                //Name client's input stream
+                //Create client input stream
                 InputStream inStream = client.getInputStream();
 
-                //Name client's output stream, enable auto buffer flush
+                //Create output stream
                 PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
 
-                //Print prompt
+                //Print server prompt
                 String msg = "\nServer: ";
                 System.out.println(msg);
 
                 //Grab data from the input stream
                 int data = inStream.read();
 
-                //While it's not a newline (i.e. not end of data stream)...
+                //If the kill signal was received, terminate server
+                if(data == 48)
+                    break;
+
+                //While it's not a newline (i.e. not end of data stream)
                 while(data != 10){
 
                     //Keep appending, reading next data, and printing
+                    System.out.println(data + " " + (char) data);
                     msg += ((char) data);
                     data = inStream.read();
-                    System.out.println(data);
                 }
 
                 //Print the data to the output stream
