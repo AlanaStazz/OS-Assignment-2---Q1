@@ -2,8 +2,8 @@
 //Alana Staszczyszyn & Elijah Tavenor
 //October 19, 2017
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -24,7 +24,7 @@ public class Ass2EchoServer {
                 Socket client = sock.accept();
 
                 //Create client input stream
-                InputStream inStream = client.getInputStream();
+                BufferedInputStream inStream =  new BufferedInputStream(client.getInputStream());
 
                 //Create output stream
                 PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
@@ -36,13 +36,8 @@ public class Ass2EchoServer {
                 //Grab data from the input stream
                 int data = inStream.read();
 
-                //If the kill signal was received, terminate server
-                if(data == 48)
-                    break;
-
                 //While it's not a newline (i.e. not end of data stream)
                 while(data != 10){
-
                     //Keep appending, reading next data, and printing
                     System.out.println(data + " " + (char) data);
                     msg += ((char) data);
