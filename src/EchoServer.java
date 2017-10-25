@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Ass2EchoServer {
+public class EchoServer {
 
     public static void main(String args[]){
             Boolean on = true;
