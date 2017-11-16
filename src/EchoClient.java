@@ -6,16 +6,18 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 public class EchoClient {
 
     public static void main(String args[]){
+        String msg = "";
 
         try{
-
+            while(!msg.equals(".")) {
             //Create new socket
-            Socket sock = new Socket("127.0.0.1",666);
+            Socket sock = new Socket(args[0],666);
 
             //Create Input Stream
             BufferedInputStream inStream =  new BufferedInputStream(sock.getInputStream());
@@ -24,12 +26,11 @@ public class EchoClient {
             PrintWriter pout = new PrintWriter(sock.getOutputStream(), true);
 
             //Create scanner for input and variable for storage
+            Scanner scan = new Scanner(System.in);
 
-            String msg = "";
 
-            for (String message: args) {
-                msg += message + " ";
-            }
+                System.out.println("Enter a message: ");
+                msg = scan.next();
 
                 //Write the data to the output stream
                 pout.println(msg);
@@ -42,9 +43,10 @@ public class EchoClient {
                     System.out.print((char) data);
                     data = inStream.read();
                 }
-
                 //End the session
                 sock.close();
+            }
+
         }
         catch(IOException ioe){
             System.err.println(ioe);

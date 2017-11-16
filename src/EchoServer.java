@@ -19,7 +19,7 @@ public class EchoServer {
 
             //While listening...
             while(on){
-
+                System.out.println("LOOPING");
                 //Listen for attempted connection
                 Socket client = sock.accept();
 
