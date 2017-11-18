@@ -29,7 +29,7 @@ public class EchoClient {
             Scanner scan = new Scanner(System.in);
 
 
-                System.out.println("Enter a message: ");
+                System.out.println("\nEnter a message: ");
                 msg = scan.nextLine();
 
                 //Write the data to the output stream
@@ -39,6 +39,7 @@ public class EchoClient {
                 int data = inStream.read();
 
                 //Print data
+		//System.out.println("");
                 while (data != -1) {
                     System.out.print((char) data);
                     data = inStream.read();
