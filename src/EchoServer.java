@@ -13,7 +13,7 @@ public class EchoServer {
     public static void main(String args[]){
             Boolean on = true;
 
-	if(args.length >= 0){
+	if(args.length > 0){
             System.err.println("Error: Extra args... discarding extra args...");
 
         }
